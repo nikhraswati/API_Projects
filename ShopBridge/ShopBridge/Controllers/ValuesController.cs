@@ -8,13 +8,12 @@ using System.Web.Http;
 
 namespace ShopBridge.Controllers
 {
-    [BasicAuthentication]
+   // [BasicAuthentication]
     public class ValuesController : ApiController
     {
         
         DataAccessLayer dal = new DataAccessLayer();
         // GET api/values
-
         [HttpGet]
         public async Task<HttpResponseMessage> FetchProduct()
         {
@@ -27,7 +26,7 @@ namespace ShopBridge.Controllers
             }
             catch(Exception e)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.BadGateway,"");
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest,"");
             }
 
         }
@@ -62,7 +61,23 @@ namespace ShopBridge.Controllers
             }
             catch (Exception e)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.BadGateway, "Error occurred while inserting record");
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Error occurred while inserting record");
+            }
+        }
+
+        [Route("api/Values/bulk")]
+        [HttpPost]
+        public async Task<HttpResponseMessage> InsertProducts([FromBody]List<Product> list)
+        {
+            try
+            {
+                var a = await Task.FromResult<bool>(dal.BulkInsert(list));
+                return Request.CreateResponse(HttpStatusCode.OK, "Records have been inserted successfully");
+
+            }
+            catch (Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Error occurred while inserting record");
             }
         }
 
@@ -74,13 +89,31 @@ namespace ShopBridge.Controllers
             {
                 var a = await Task.FromResult<bool>(dal.UpdateProdList(p));
 
-
-                return Request.CreateResponse(HttpStatusCode.OK, "Record updated successfully");
+              return Request.CreateResponse(HttpStatusCode.OK, "Record updated successfully");
 
             }
             catch (Exception e)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadGateway, "Error occurred while updating record");
+
+            }
+
+        }
+
+        [Route("api/Values/bulk")]
+        [HttpPut]
+        public async Task<HttpResponseMessage> ModifyProucts(List<Product> p)
+        {
+            try
+            {
+                var a = await Task.FromResult<bool>(dal.BulkUpdate(p));
+
+                return Request.CreateResponse(HttpStatusCode.OK, "Records have been updated successfully");
+
+            }
+            catch (Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadGateway, "Error occurred while updating the records");
 
             }
 
@@ -103,14 +136,30 @@ namespace ShopBridge.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.BadGateway, "Error occurred while deleting the record");
             }
         }
+        [HttpDelete]
+        [Route("api/Values/bulk")]
+        public async Task<HttpResponseMessage> RemoveProducts(List<Product> p)
+        {
+            try
+            {
+                var a = await Task.FromResult<bool>(dal.BulkDelete(p));
 
+
+                return Request.CreateResponse(HttpStatusCode.OK, "Records have been deleted successfully");
+
+            }
+            catch (Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadGateway, "Error occurred while deleting the records");
+            }
+        }
         //[HttpGet]
         //public HttpResponseMessage ReturnAPIResponse(List<Product> message,HttpStatusCode code,)
         //{
         //    return Request.CreateResponse(code, message);
 
         //}
-        
+
         //public HttpResponseMessage ReturnAPIErrorResponse(string message, HttpStatusCode code)
         //{
         //    return Request.CreateErrorResponse(code, message);

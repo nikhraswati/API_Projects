@@ -15,7 +15,6 @@ namespace ShopBridge
         {
             try
             {
-
                 var result = context.Products.ToList();
                 return result;
             }
@@ -52,7 +51,20 @@ namespace ShopBridge
             }
 
         }
+        public bool BulkInsert(List<Product> p)
+        {
+            try
+            {
+                context.Products.BulkInsert(p);
+                context.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                throw (e);
+            }
 
+        }
         public bool UpdateProdList(Product p)
         {
             try
@@ -72,7 +84,20 @@ namespace ShopBridge
             }
 
         }
+        public bool BulkUpdate(List<Product> p)
+        {
+            try
+            {
+                context.Products.BulkUpdate(p);
+                context.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                throw (e);
+            }
 
+        }
         public bool DeleteProduct(int id)
         {
             try
@@ -88,7 +113,22 @@ namespace ShopBridge
             }
 
         }
-    
+
+        public bool BulkDelete(List<Product> p)
+        {
+            try
+            {
+                context.Products.BulkDelete(p);
+                context.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                throw (e);
+            }
+
+        }
+
     }
 }
    

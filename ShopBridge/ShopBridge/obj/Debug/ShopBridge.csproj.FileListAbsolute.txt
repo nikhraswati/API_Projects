@@ -84,3 +84,7 @@ C:\Users\Gupta\source\repos\ShopBridge\ShopBridge\obj\Debug\ShopBridge.csproj.Co
 C:\Users\Gupta\source\repos\ShopBridge\ShopBridge\obj\Debug\ShopBridge.csproj.CopyComplete
 C:\Users\Gupta\source\repos\ShopBridge\ShopBridge\obj\Debug\ShopBridge.dll
 C:\Users\Gupta\source\repos\ShopBridge\ShopBridge\obj\Debug\ShopBridge.pdb
+C:\Users\Gupta\source\repos\ShopBridge\ShopBridge\bin\EntityFramework.BulkInsert.dll
+C:\Users\Gupta\source\repos\ShopBridge\ShopBridge\bin\EntityFramework.BulkInsert.dll.config
+C:\Users\Gupta\source\repos\ShopBridge\ShopBridge\bin\Z.EntityFramework.Extensions.dll
+C:\Users\Gupta\source\repos\ShopBridge\ShopBridge\bin\Z.EntityFramework.Extensions.xml
